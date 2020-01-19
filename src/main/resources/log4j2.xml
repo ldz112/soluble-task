@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <properties>
+        <Property name="LOG_PATTERN">%-d{yyyy-MM-dd HH:mm:ss} [%t] %-5p %c:%L - %m%n</Property>
+    </properties>
+    <appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+        <RollingRandomAccessFile name="logFileError"
+                                 fileName="logs/error.log"
+                                 filePattern="logs/$${date:yyyy-MM}/%d{yyyy-MM-dd}-%i.logError.log.gz">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="50 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+            <ThresholdFilter level="ERROR"/>
+        </RollingRandomAccessFile>
+        <RollingRandomAccessFile name="logFileInfo"
+                                 fileName="logs/info.log"
+                                 filePattern="logs/$${date:yyyy-MM}/%d{yyyy-MM-dd}-%i.info.log.gz">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="50 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+            <ThresholdFilter level="INFO"/>
+        </RollingRandomAccessFile>
+    </appenders>
+    <loggers>
+
+        <AsyncRoot level="INFO" includeLocation="true">
+            <appender-ref ref="console"/>
+            <appender-ref ref="logFileError"/>
+            <appender-ref ref="logFileInfo"/>
+        </AsyncRoot>
+    </loggers>
+</Configuration>
