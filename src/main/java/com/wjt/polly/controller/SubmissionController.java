@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 /**
  * @author liqin@nd.com.cn
  * @version V1.0
@@ -25,7 +27,7 @@ public class SubmissionController {
     private SubmissionEventPublisher submissionEventPublisher;
 
     @RequestMapping(value = "/submissions", method = RequestMethod.POST)
-    public Submission establish(@RequestBody Submission submission){
+    public Submission establish(@Valid @RequestBody Submission submission){
 
 
         //产生创建事件

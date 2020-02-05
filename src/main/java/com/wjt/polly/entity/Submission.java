@@ -2,6 +2,9 @@ package com.wjt.polly.entity;
 
 import lombok.Data;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -19,6 +22,9 @@ public class Submission {
     private Date startTime;
     private Date endTime;
     private String realmId;//操作对象，uuid
+    @NotNull
+    @Max(10)
+    @Min(1)
     private int state;//任务状态
 
 }
